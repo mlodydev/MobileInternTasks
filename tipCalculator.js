@@ -3,20 +3,19 @@ let calculator = {
     tipPercentage:0,
     tipValue:0,
     setTip: function(){
-        let tipPerc = window.prompt("Enter percentage of tip");
-        while(isNaN(tipPerc) || tipPerc<0){
+        this.tipPercentage = window.prompt("Enter percentage of tip");
+        while(isNaN(this.tipPercentage) || this.tipPercentage<0){
             alert("Value of a tip must be a non-negative number");
-            tipPerc = window.prompt("Enter percentage of tip");
+            this.tipPercentage = window.prompt("Enter percentage of tip");
         }
-        this.tipPercentage = tipPerc*0.01;
+        this.tipPercentage = this.tipPercentage*0.01;
     },
     setBill: function(){
-        let billVal = window.prompt("Enter value of a bill");
-        while(isNaN(billVal) || billVal<=0){
+        this.billValue = window.prompt("Enter value of a bill");
+        while(isNaN(this.billValue) || this.billValue<=0){
             alert("Value of a bill must be a non-negative number");
-            billVal = window.prompt("Enter value of bil");
+            this.billValue = window.prompt("Enter value of bil");
         }
-        this.billValue = billVal;
     },
     calculateTip: function(){
         this.tipValue = this.billValue * this.tipPercentage;

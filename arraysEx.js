@@ -1,18 +1,26 @@
-var arrayMother = new Array(100);
-var numberOfElements=0;
-for(let i = 0; i < 100; i++){
-    let lengthOfArray = Math.round( Math.random() * 45 ) + 5;
+const numberOfArrays = 100;
+
+var arrayMother = new Array(numberOfArrays);
+
+var numberOfElements = 0;
+
+const lowerLengthBound = 5;
+
+const upperLengthBound = 50 - lowerLengthBound;
+
+const upperValueBound = 100;
+
+for(let i = 0; i < numberOfArrays; i++){
+    let lengthOfArray = Math.round( Math.random() * upperLengthBound ) + lowerLengthBound;
     numberOfElements += lengthOfArray;
     arrayMother[i] = new Array(lengthOfArray);
-    for(let i2 = 0; i2 < lengthOfArray; i2++){
-        arrayMother[i][i2] = Math.round( Math.random() * 100 );
+    for(let j = 0; j < lengthOfArray; j++){
+        arrayMother[i][j] = Math.round( Math.random() * upperValueBound );
     }
-}
-for(let i = 0; i < 100; i++){
-    console.log(arrayMother[i]);
 }
 // done A.
 
+//compare function wrote to compare objects using sort()
 function compare(a, b){
     const arrayA = a.length;
     const arrayB = b.length;
@@ -27,22 +35,12 @@ function compare(a, b){
     return comparison;
 }
 
-console.log(arrayMother.sort(compare));
-console.log("po sortowaniu");
-
-for(let i = 0; i < 100; i++){
-    console.log(arrayMother[i]);
-}
-
 var bigArray = new Array();
 
-for(let i = 0; i < 100; i++){
-    //console.log(arrayMother[i]);
+for(let i = 0; i < numberOfArrays; i++){
     let lengthOfArray = arrayMother[i].length;
-    //console.log(`length of array: ${lengthOfArray}`);
-    for(let i2 = 0; i2 < lengthOfArray; i2++){
-        bigArray.push(arrayMother[i][i2]);
-        //console.log(`next element of array: ${arrayMother[i][i2]}`);
+    for(let j = 0; j < lengthOfArray; j++){
+        bigArray.push(arrayMother[i][j]);
     }
 }
 console.log(`Generated array ${bigArray}`);
@@ -52,24 +50,23 @@ var bigArray2 = [...bigArray];
 
 function removeItems(arrayToRemove, isEven){
     let index = 0;
-    let index2 = 0;
+    let numberOfRemovedElements = 0;
     let lengthOfMyArray =  arrayToRemove.length;
     
-    while(index < lengthOfMyArray){
+    while (index < lengthOfMyArray){
         if(isEven === false){
-            if( ( 
-                ( arrayToRemove[index - index2] % 2 ) !== 0 ) ||
-                ( arrayToRemove[index - index2] === 0 )
-              ) {
-                arrayToRemove.splice(index - index2, 1);
-                index2++;
+            if( ((arrayToRemove[index - numberOfRemovedElements] % 2 ) !== 0)
+                || (arrayToRemove[index - numberOfRemovedElements] === 0) )
+            {
+                arrayToRemove.splice(index - numberOfRemovedElements, 1);
+                numberOfRemovedElements++;
             }
             index++;
         }
         else{
-            if( ( arrayToRemove[index - index2] % 2 ) === 0 ){
-                arrayToRemove.splice(index - index2, 1);
-                index2++;
+            if( ( arrayToRemove[index - numberOfRemovedElements] % 2 ) === 0 ){
+                arrayToRemove.splice(index - numberOfRemovedElements, 1);
+                numberOfRemovedElements++;
             }
             index++;
         }
@@ -87,16 +84,6 @@ bigArray.sort( function(a,b){ return a - b } );
 console.log(`Generated array - no odd numbers - ascending order ${bigArray}`);
 //done D.
 
-
-// Now there is a problem. If I am supposed to do it on the same array there will be no element left
-bigArray = removeItems(bigArray, true);
-
-console.log(`Generated array - no even numbers ${bigArray}`);
-
-bigArray.sort( function(a,b){ return a - b } );
-
-//or if i am supposed to do it once again on full array it will be as follow
-
 bigArray2 = removeItems(bigArray2, true);
 
 console.log(`Generated array - no even numbers ${bigArray2}`);
@@ -106,3 +93,4 @@ bigArray2.sort( function(a,b){ return a - b } );
 console.log(`Generated array - no even numbers - ascending order ${bigArray2}`);
 //done E.
 
+// lodash
